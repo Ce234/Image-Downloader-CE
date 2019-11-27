@@ -76,14 +76,14 @@ class ImageFetcherCE private constructor() {
             }
 
             if(loadRequest.hasLoadingDrawableRes())
-                imageView.post { imageView.setImageResource(loadRequest.loadingDrawableRes) }
+                handlerMain.post { imageView.setImageResource(loadRequest.loadingDrawableRes) }
 
             var bitmap = imageLoader.loadImage(loadRequest.urlToLoad, imageView.width, imageView.height)
 
             when (bitmap) {
                 null -> {
                     if(loadRequest.hasErrorDrawableRes())
-                        imageView.post { imageView.setImageResource(loadRequest.errorDrawableRes) }
+                        handlerMain.post { imageView.setImageResource(loadRequest.errorDrawableRes) }
                 }
                 else -> {
                     if(loadRequest.hasResize()) {
